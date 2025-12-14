@@ -94,8 +94,39 @@ triple n = (\x -> x * 3) n
 siguiente' :: Integer -> Integer
 siguiente' n = (\x -> x + 1) n
 --suma
-suma' :: Integer -> Integer -> Integer
-suma' n1 n2 = (\x y -> x + y) n1 n2
+suma :: Integer -> Integer -> Integer
+suma n1 n2 = (\x y -> x + y) n1 n2
 --sumarDos
 sumarDos :: Integer -> Integer
 sumarDos n = (\x -> x +2) n
+
+
+--Pattern matching, tal como hicimos en or'' sirve para dar por sentado algunos atributos
+signo :: Integer -> Integer
+signo 0 = 0
+signo n | n > 0 = 1
+        | otherwise = -1
+        -- para llamar a un negativo hacemos "signo (-1)"
+
+--Podemos concatenar operaciones de manera tal que se ejecuten una tras otra
+-- (even . (+5)) 3
+-- Va a hacer 3 + 5 y ese resultado ver si es par
+
+-- (odd . siguiente . suma 7) 5 
+-- Va a hacer 5 aplicado a suma con 7, a ese le va a aplicar el siguiente y ahí ver si es impar.
+
+-- Ejercicio: armar una función que dado un punto en el plano, nos de su distancia al origen
+type Punto = (Double,Double)
+type Distancia = Double
+
+distanciaOrigen :: Punto -> Distancia
+distanciaOrigen (x,y) = sqrt(x*x + y*y)
+
+--Si quisieramos hace rque esta distancia funcione tambien para espacios, es decir 3D
+--Usamos datas
+data Punto' = Plano{x::Double,y::Double} |
+              Espacio{x::Double,y::Double,z::Double}
+
+distanciaOrigen' :: Punto' -> Distancia
+distanciaOrigen' (Plano x y) = sqrt(x*x + y*y)
+distanciaOrigen' (Espacio x y z) = sqrt(x*x + y*y + z*z)
