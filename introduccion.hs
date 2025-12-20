@@ -125,7 +125,7 @@ distanciaOrigen (x,y) = sqrt(x*x + y*y)
 --Si quisieramos hace rque esta distancia funcione tambien para espacios, es decir 3D
 --Usamos datas
 data Punto' = Plano{x::Double,y::Double} |
-              Espacio{x::Double,y::Double,z::Double}
+              Espacio{x::Double,y::Double,z::Double} deriving Show
 
 distanciaOrigen' :: Punto' -> Distancia
 distanciaOrigen' (Plano x y) = sqrt(x*x + y*y)
